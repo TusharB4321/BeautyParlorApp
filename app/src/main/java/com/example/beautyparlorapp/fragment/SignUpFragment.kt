@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatActivity.MODE_PRIVATE
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -39,6 +40,11 @@ class SignUpFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+//        if (activity is AppCompatActivity) {
+//            (activity as AppCompatActivity).supportActionBar!!.hide()
+//        }
+//        binding.toolbar.setTitle("AAAA")
+//        binding.toolbar.setLogo(R.drawable.beauty_logo)
         // Initialize ViewModel
         val userRepository = UserRepository(FirebaseAuth.getInstance(), FirebaseDatabase.getInstance())
         userViewModel = ViewModelProvider(this, ViewModelFactory(userRepository))[UserViewModel::class.java]
