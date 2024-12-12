@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/splashFragment"
-        android:name="com.example.beautyparlorapp.fragment.SplashFragment"
+        android:name="com.example.beautyparlorapp.ui.fragment.SplashFragment"
         android:label="fragment_splash"
         tools:layout="@layout/fragment_splash" >
         <action
@@ -16,19 +16,25 @@
         <action
             android:id="@+id/action_splashFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_splashFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
     </fragment>
     <fragment
         android:id="@+id/signUpFragment"
-        android:name="com.example.beautyparlorapp.fragment.SignUpFragment"
+        android:name="com.example.beautyparlorapp.ui.fragment.SignUpFragment"
         android:label="fragment_sign_up"
         tools:layout="@layout/fragment_sign_up" >
         <action
             android:id="@+id/action_signUpFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_signUpFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.example.beautyparlorapp.fragment.LoginFragment"
+        android:name="com.example.beautyparlorapp.ui.fragment.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
         <action
@@ -37,10 +43,106 @@
         <action
             android:id="@+id/action_loginFragment_to_forgetPasswordFragment"
             app:destination="@id/forgetPasswordFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
     </fragment>
     <fragment
         android:id="@+id/forgetPasswordFragment"
-        android:name="com.example.beautyparlorapp.fragment.ForgetPasswordFragment"
+        android:name="com.example.beautyparlorapp.ui.fragment.ForgetPasswordFragment"
         android:label="fragment_forget_password"
         tools:layout="@layout/fragment_forget_password" />
+    <fragment
+        android:id="@+id/cartFragment"
+        android:name="com.example.beautyparlorapp.ui.fragment.bottomnav.CartFragment"
+        android:label="Cart"
+        tools:layout="@layout/fragment_cart" >
+        <action
+            android:id="@+id/action_cartFragment_to_appoinmentFragment"
+            app:destination="@id/appoinmentFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/appoinmentFragment"
+        android:name="com.example.beautyparlorapp.ui.fragment.AppoinmentFragment"
+        android:label="fragment_appoinment"
+        tools:layout="@layout/fragment_appoinment" >
+        <action
+            android:id="@+id/action_appoinmentFragment_to_paymentFragment"
+            app:destination="@id/paymentFragment" />
+        <action
+            android:id="@+id/action_appoinmentFragment_to_cartFragment"
+            app:destination="@id/cartFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/bookingFragment"
+        android:name="com.example.beautyparlorapp.ui.fragment.bottomnav.BookingFragment"
+        android:label="Booking"
+        tools:layout="@layout/fragment_booking" />
+    <fragment
+        android:id="@+id/detailServiceFragment"
+        android:name="com.example.beautyparlorapp.ui.fragment.DetailServiceFragment"
+        android:label="fragment_detail_service"
+        tools:layout="@layout/fragment_detail_service" >
+        <action
+            android:id="@+id/action_detailServiceFragment_to_appoinmentFragment"
+            app:destination="@id/appoinmentFragment" />
+        <action
+            android:id="@+id/action_detailServiceFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/editProfileFragment"
+        android:name="com.example.beautyparlorapp.ui.fragment.EditProfileFragment"
+        android:label="fragment_edit_profile"
+        tools:layout="@layout/fragment_edit_profile" />
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.beautyparlorapp.ui.fragment.bottomnav.HomeFragment"
+        android:label="Home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_detailServiceFragment"
+            app:destination="@id/detailServiceFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_searchFragment"
+            app:destination="@id/searchFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.beautyparlorapp.ui.fragment.bottomnav.ProfileFragment"
+        android:label="Profile"
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profileFragment_to_editProfileFragment"
+            app:destination="@id/editProfileFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/paymentFragment"
+        android:name="com.example.beautyparlorapp.ui.fragment.PaymentFragment"
+        android:label="fragment_payment"
+        tools:layout="@layout/fragment_payment" >
+        <action
+            android:id="@+id/action_paymentFragment_to_successFragment"
+            app:destination="@id/successFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/successFragment"
+        android:name="com.example.beautyparlorapp.ui.fragment.SuccessFragment"
+        android:label="fragment_success"
+        tools:layout="@layout/fragment_success" />
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.example.beautyparlorapp.ui.fragment.SearchFragment"
+        android:label="fragment_search"
+        tools:layout="@layout/fragment_search" >
+        <action
+            android:id="@+id/action_searchFragment_to_detailServiceFragment"
+            app:destination="@id/detailServiceFragment" />
+        <action
+            android:id="@+id/action_searchFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
 </navigation>

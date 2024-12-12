@@ -1,4 +1,4 @@
-package com.example.beautyparlorapp.fragment
+package com.example.beautyparlorapp.ui.fragment
 
 import android.os.Bundle
 import android.os.Handler

@@ -1,4 +1,4 @@
-package com.example.beautyparlorapp.fragment
+package com.example.beautyparlorapp.ui.fragment
 
 import android.content.Intent
 import android.os.Bundle
@@ -71,7 +71,8 @@ class LoginFragment : Fragment() {
                     Toast.makeText(requireContext(), "Logging in...", Toast.LENGTH_SHORT).show()
                 }
                 is Resources.Success -> {
-                    resource.data?.let { token ->
+                    resource.data?.let {
+                        findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
                         Toast.makeText(requireContext(), "Login successful!", Toast.LENGTH_SHORT).show()
                     }
                 }
