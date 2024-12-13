@@ -31,6 +31,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.splashFragment,
                 R.id.signUpFragment,
                 R.id.loginFragment,
+                R.id.serviceListFragment,
                 R.id.forgetPasswordFragment,
                     ->{
                     binding.bottomBar.visibility= View.GONE

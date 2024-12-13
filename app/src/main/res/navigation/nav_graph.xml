@@ -86,9 +86,6 @@
         <action
             android:id="@+id/action_detailServiceFragment_to_appoinmentFragment"
             app:destination="@id/appoinmentFragment" />
-        <action
-            android:id="@+id/action_detailServiceFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
     </fragment>
     <fragment
         android:id="@+id/editProfileFragment"
@@ -101,11 +98,11 @@
         android:label="Home"
         tools:layout="@layout/fragment_home" >
         <action
-            android:id="@+id/action_homeFragment_to_detailServiceFragment"
-            app:destination="@id/detailServiceFragment" />
-        <action
             android:id="@+id/action_homeFragment_to_searchFragment"
             app:destination="@id/searchFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_serviceListFragment"
+            app:destination="@id/serviceListFragment" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
@@ -144,5 +141,14 @@
         <action
             android:id="@+id/action_searchFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/serviceListFragment"
+        android:name="com.example.beautyparlorapp.ui.fragment.ServiceListFragment"
+        android:label="fragment_service_list"
+        tools:layout="@layout/fragment_service_list" >
+        <action
+            android:id="@+id/action_serviceListFragment_to_detailServiceFragment"
+            app:destination="@id/detailServiceFragment" />
     </fragment>
 </navigation>
