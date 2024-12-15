@@ -30,7 +30,6 @@ class ProfileFragment : Fragment() {
 
         binding.logout.setOnClickListener {
             showLogoutConfirmationDialog()
-            findNavController().navigate(R.id.action_profileFragment_to_loginFragment)
         }
     }
 
@@ -42,6 +41,7 @@ class ProfileFragment : Fragment() {
         builder.setMessage("Are you sure you want to log out?")
         builder.setPositiveButton("Yes") { _, _ ->
            auth.signOut()
+           findNavController().navigate(R.id.action_profileFragment_to_loginFragment)
         }
         builder.setNegativeButton("No") { dialog, _ ->
             dialog.dismiss() // Close the dialog
