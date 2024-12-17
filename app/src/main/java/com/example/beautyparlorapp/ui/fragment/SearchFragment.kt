@@ -14,6 +14,7 @@ import com.example.beautyparlorapp.adapter.SearchAdapter
 import com.example.beautyparlorapp.adapter.ServiceAdapter
 import com.example.beautyparlorapp.data.ServiceModel
 import com.example.beautyparlorapp.databinding.FragmentSearchBinding
+import com.example.beautyparlorapp.utils.Constant
 import com.google.firebase.firestore.FirebaseFirestore
 
 
@@ -84,7 +85,7 @@ class SearchFragment : Fragment() {
         val bundle=Bundle().apply {
             putString("serviceName",serviceModel.serviceName)
         }
-         findNavController().navigate(R.id.action_searchFragment_to_detailServiceFragment,bundle)
+         findNavController().navigate(R.id.action_searchFragment_to_detailServiceFragment,bundle,Constant.slideRightLeftNavOptions)
     }
 
 }

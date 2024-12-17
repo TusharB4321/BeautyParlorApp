@@ -9,6 +9,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.navigation.fragment.findNavController
 import com.example.beautyparlorapp.R
 import com.example.beautyparlorapp.databinding.FragmentProfileBinding
+import com.example.beautyparlorapp.utils.Constant
 import com.google.firebase.auth.FirebaseAuth
 
 class ProfileFragment : Fragment() {
@@ -25,7 +26,7 @@ class ProfileFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.btnEditProfile.setOnClickListener {
-            findNavController().navigate(R.id.action_profileFragment_to_editProfileFragment)
+            findNavController().navigate(R.id.action_profileFragment_to_editProfileFragment,null,Constant.slideRightLeftNavOptions)
         }
 
         binding.logout.setOnClickListener {
@@ -41,7 +42,7 @@ class ProfileFragment : Fragment() {
         builder.setMessage("Are you sure you want to log out?")
         builder.setPositiveButton("Yes") { _, _ ->
            auth.signOut()
-           findNavController().navigate(R.id.action_profileFragment_to_loginFragment)
+           findNavController().navigate(R.id.action_profileFragment_to_loginFragment,null,Constant.slideRightLeftNavOptions)
         }
         builder.setNegativeButton("No") { dialog, _ ->
             dialog.dismiss() // Close the dialog

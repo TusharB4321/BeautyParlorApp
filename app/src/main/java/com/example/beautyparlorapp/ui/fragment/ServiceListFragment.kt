@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.beautyparlorapp.R
@@ -14,6 +15,7 @@ import com.example.beautyparlorapp.adapter.ServiceAdapter
 import com.example.beautyparlorapp.adapter.ServiceListAdapter
 import com.example.beautyparlorapp.data.ServiceModel
 import com.example.beautyparlorapp.databinding.FragmentServiceListBinding
+import com.example.beautyparlorapp.utils.Constant
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.toObject
 
@@ -81,7 +83,8 @@ class ServiceListFragment : Fragment(),ServiceListAdapter.CartUpdateListener {
         val bundle= Bundle().apply {
             putString("serviceName",serviceModel.serviceName)
         }
-       findNavController().navigate(R.id.action_serviceListFragment_to_detailServiceFragment,bundle)
+
+       findNavController().navigate(R.id.action_serviceListFragment_to_detailServiceFragment,bundle,Constant.slideRightLeftNavOptions)
     }
 
     override fun onCartUpdated(updatedList: ArrayList<ServiceModel>) {

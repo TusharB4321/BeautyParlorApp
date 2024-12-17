@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.denzcoskun.imageslider.constants.ScaleTypes
@@ -14,6 +15,7 @@ import com.example.beautyparlorapp.R
 import com.example.beautyparlorapp.adapter.ServiceAdapter
 import com.example.beautyparlorapp.data.ServiceModel
 import com.example.beautyparlorapp.databinding.FragmentHomeBinding
+import com.example.beautyparlorapp.utils.Constant
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.FirebaseFirestore
@@ -45,7 +47,7 @@ class HomeFragment : Fragment() {
         setUpRecyclerView()
 
         binding.search.setOnClickListener {
-            findNavController().navigate(R.id.action_homeFragment_to_searchFragment)
+            findNavController().navigate(R.id.action_homeFragment_to_searchFragment,null,Constant.slideRightLeftNavOptions)
         }
     }
 
@@ -115,6 +117,6 @@ class HomeFragment : Fragment() {
             //putInt("serviceImage", imgRes)
         }
 
-        findNavController().navigate(R.id.action_homeFragment_to_serviceListFragment, bundle)
+        findNavController().navigate(R.id.action_homeFragment_to_serviceListFragment, bundle,Constant.slideRightLeftNavOptions)
     }
 }
