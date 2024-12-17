@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.denzcoskun.imageslider.constants.ScaleTypes
@@ -84,7 +83,6 @@ class HomeFragment : Fragment() {
 
     private fun displayName() {
         val userId = FirebaseAuth.getInstance().currentUser?.uid
-
         if (userId != null) {
             val userRef = FirebaseDatabase.getInstance().getReference("users")
                 .child(userId)
@@ -116,7 +114,6 @@ class HomeFragment : Fragment() {
             putString("serviceCategory", category.serviceCategory) // Pass the selected category to the next fragment
             //putInt("serviceImage", imgRes)
         }
-
         findNavController().navigate(R.id.action_homeFragment_to_serviceListFragment, bundle,Constant.slideRightLeftNavOptions)
     }
 }

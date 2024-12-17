@@ -19,80 +19,96 @@ import com.example.beautyparlorapp.ui.fragment.bottomnav.CartFragment
 import com.google.firebase.firestore.FirebaseFirestore
 
 
-class ServiceListAdapter(private val onProductClick: (ServiceModel) -> Unit, private val context: Context, private val list:ArrayList<ServiceModel>,
-                         private val isCartFragment: Boolean,private val cartUpdateListener: CartUpdateListener):
-    RecyclerView.Adapter<ServiceListAdapter.ViewHolder>() {
+class ServiceListAdapter(
+    private val onProductClick: (ServiceModel) -> Unit,
+    private val context: Context,
+    private val list: ArrayList<ServiceModel>,
+    private val isCartFragment: Boolean,
+    private val cartUpdateListener: CartUpdateListener
+) : RecyclerView.Adapter<ServiceListAdapter.ViewHolder>() {
 
-
-
-    class ViewHolder(val binding: ServiceListItemLayoutBinding):RecyclerView.ViewHolder(binding.root)
+    class ViewHolder(val binding: ServiceListItemLayoutBinding) : RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-
-        return ViewHolder(ServiceListItemLayoutBinding.inflate(LayoutInflater.from(context),parent,false))
+        val binding = ServiceListItemLayoutBinding.inflate(LayoutInflater.from(context), parent, false)
+        return ViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val model = list[position]
 
-        val model=list[position]
+        setUpItemView(holder, model, position)
+        setClickListeners(holder, model, position)
+    }
 
-        holder.binding.serviceName.text=model.serviceName
+    override fun getItemCount(): Int = list.size
 
-        if (isCartFragment){
-            holder.binding.imgCancel.visibility= View.VISIBLE
-            if (position % 2 == 0) {
-                holder.binding.mainLayout.setBackgroundColor(Color.parseColor("#B1E2E2"))
-            } else {
-                holder.binding.mainLayout.setBackgroundColor(Color.parseColor("#F2BBEE"))
-            }
-            holder.binding.serviceDuration.text="⏱${model.serviceDuration}"
-            holder.binding.servicePrice.text="${model.servicePrice}"
+    private fun setUpItemView(holder: ViewHolder, model: ServiceModel, position: Int) {
+        holder.binding.serviceName.text = model.serviceName
 
-            val firestore=FirebaseFirestore.getInstance()
-            holder.binding.imgCancel.setOnClickListener {
-                AlertDialog.Builder(holder.itemView.context)
-                    .setTitle("Delete Cart Item")
-                    .setMessage("Are you sure you want to delete this item from your cart?")
-                    .setPositiveButton("Yes") { dialog, _ ->
-                        // Delete the cart item
-                        val itemId = model.documentId // Ensure `id` is set in your model
-
-                        if (itemId != null) {
-                            Log.d("SerViceListAdapter",itemId)
-                            firestore.collection("Cart Info").document(itemId)
-                                .delete()
-                                .addOnSuccessListener {
-                                    list.removeAt(position)
-                                    notifyItemRemoved(position)
-                                    cartUpdateListener.onCartUpdated(list)
-                                    Toast.makeText(holder.itemView.context, "Item deleted", Toast.LENGTH_SHORT).show()
-                                }
-                                .addOnFailureListener { e ->
-                                    Toast.makeText(holder.itemView.context, "Error deleting item: ${e.message}", Toast.LENGTH_SHORT).show()
-                                }
-                        }
-                        dialog.dismiss()
-                    }
-                    .setNegativeButton("No") { dialog, _ ->
-                        dialog.dismiss()
-                    }
-                    .show()
-            }
-        }else{
-            holder.binding.imgCancel.visibility= View.GONE
-            if (position % 2 == 0) {
-                holder.binding.mainLayout.setBackgroundColor(Color.parseColor("#F2BBEE"))
-            } else {
-                holder.binding.mainLayout.setBackgroundColor(Color.parseColor("#B1E2E2"))
-            }
-            holder.binding.serviceDuration.text="Service Duration:${model.serviceDuration}hrs"
-            holder.binding.servicePrice.text="Service Price:${model.servicePrice}Rs"
+        if (isCartFragment) {
+            setCartFragmentView(holder, model, position)
+        } else {
+            setServiceFragmentView(holder, model, position)
         }
+    }
+
+    private fun setCartFragmentView(holder: ViewHolder, model: ServiceModel, position: Int) {
+        holder.binding.imgCancel.visibility = View.VISIBLE
+        holder.binding.serviceDuration.text = "⏱${model.serviceDuration}"
+        holder.binding.servicePrice.text = "${model.servicePrice}"
+
+        setRowBackgroundColor(holder, position)
+
+        holder.binding.imgCancel.setOnClickListener {
+            showDeleteConfirmationDialog(holder, model, position)
+        }
+    }
+
+    private fun setServiceFragmentView(holder: ViewHolder, model: ServiceModel, position: Int) {
+        holder.binding.imgCancel.visibility = View.GONE
+        holder.binding.serviceDuration.text = "Service Duration: ${model.serviceDuration}hrs"
+        holder.binding.servicePrice.text = "Service Price: ${model.servicePrice}Rs"
+
+        setRowBackgroundColor(holder, position)
+    }
+
+    private fun setRowBackgroundColor(holder: ViewHolder, position: Int) {
+        val backgroundColor = if (position % 2 == 0) "#B1E2E2" else "#F2BBEE"
+        holder.binding.mainLayout.setBackgroundColor(Color.parseColor(backgroundColor))
+    }
+
+    private fun setClickListeners(holder: ViewHolder, model: ServiceModel, position: Int) {
         holder.binding.root.setOnClickListener { onProductClick(model) }
     }
 
-    override fun getItemCount(): Int {
-        return list.size
+    private fun showDeleteConfirmationDialog(holder: ViewHolder, model: ServiceModel, position: Int) {
+        AlertDialog.Builder(holder.itemView.context)
+            .setTitle("Delete Cart Item")
+            .setMessage("Are you sure you want to delete this item from your cart?")
+            .setPositiveButton("Yes") { dialog, _ ->
+                deleteCartItem(holder, model, position)
+                dialog.dismiss()
+            }
+            .setNegativeButton("No") { dialog, _ -> dialog.dismiss() }
+            .show()
+    }
+
+    private fun deleteCartItem(holder: ViewHolder, model: ServiceModel, position: Int) {
+        val firestore = FirebaseFirestore.getInstance()
+        val itemId = model.documentId ?: return
+
+        firestore.collection("Cart Info").document(itemId)
+            .delete()
+            .addOnSuccessListener {
+                list.removeAt(position)
+                notifyItemRemoved(position)
+                cartUpdateListener.onCartUpdated(list)
+                Toast.makeText(holder.itemView.context, "Item deleted", Toast.LENGTH_SHORT).show()
+            }
+            .addOnFailureListener { e ->
+                Toast.makeText(holder.itemView.context, "Error deleting item: ${e.message}", Toast.LENGTH_SHORT).show()
+            }
     }
 
     interface CartUpdateListener {

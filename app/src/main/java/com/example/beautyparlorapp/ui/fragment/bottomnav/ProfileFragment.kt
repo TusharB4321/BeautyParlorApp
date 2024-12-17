@@ -13,30 +13,43 @@ import com.example.beautyparlorapp.R
 import com.example.beautyparlorapp.databinding.FragmentProfileBinding
 import com.example.beautyparlorapp.utils.Constant
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.values
 
 class ProfileFragment : Fragment() {
+
     private lateinit var binding: FragmentProfileBinding
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding=FragmentProfileBinding.inflate(layoutInflater)
+        binding = FragmentProfileBinding.inflate(layoutInflater)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        initListeners()
         showProfileFields()
-        binding.btnEditProfile.setOnClickListener {
-            findNavController().navigate(R.id.action_profileFragment_to_editProfileFragment,null,Constant.slideRightLeftNavOptions)
-        }
+    }
 
+    private fun initListeners() {
+        binding.btnEditProfile.setOnClickListener {
+            navigateToEditProfile()
+        }
         binding.logout.setOnClickListener {
             showLogoutConfirmationDialog()
         }
+    }
+
+    private fun navigateToEditProfile() {
+        findNavController().navigate(
+            R.id.action_profileFragment_to_editProfileFragment,
+            null,
+            Constant.slideRightLeftNavOptions
+        )
     }
 
     private fun showProfileFields() {
@@ -71,21 +84,23 @@ class ProfileFragment : Fragment() {
         }
     }
 
-
     private fun showLogoutConfirmationDialog() {
-
-        val auth=FirebaseAuth.getInstance()
-        val builder = AlertDialog.Builder(requireContext())
-        builder.setTitle("Logout")
-        builder.setMessage("Are you sure you want to log out?")
-        builder.setPositiveButton("Yes") { _, _ ->
-           auth.signOut()
-           findNavController().navigate(R.id.action_profileFragment_to_loginFragment,null,Constant.slideRightLeftNavOptions)
-        }
-        builder.setNegativeButton("No") { dialog, _ ->
-            dialog.dismiss() // Close the dialog
-        }
-        builder.create().show()
+        AlertDialog.Builder(requireContext())
+            .setTitle("Logout")
+            .setMessage("Are you sure you want to log out?")
+            .setPositiveButton("Yes") { _, _ -> logout() }
+            .setNegativeButton("No") { dialog, _ -> dialog.dismiss() }
+            .create()
+            .show()
     }
 
+    private fun logout() {
+        val auth=FirebaseAuth.getInstance()
+         auth.signOut()
+        findNavController().navigate(
+            R.id.action_profileFragment_to_loginFragment,
+            null,
+            Constant.slideRightLeftNavOptions
+        )
+    }
 }

@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.example.beautyparlorapp.R
 import com.example.beautyparlorapp.databinding.FragmentEditProfileBinding
@@ -23,80 +24,95 @@ import kotlinx.coroutines.launch
 class EditProfileFragment : Fragment() {
 
     private lateinit var binding: FragmentEditProfileBinding
-    private lateinit var databaseRef: DatabaseReference
+    private val databaseRef: DatabaseReference by lazy {
+        FirebaseDatabase.getInstance().getReference("users").child(FirebaseAuth.getInstance().currentUser?.uid ?: "")
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding=FragmentEditProfileBinding.inflate(layoutInflater)
+        binding = FragmentEditProfileBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-
-        val userId=FirebaseAuth.getInstance().currentUser?.uid
-        if (userId!=null){
-             databaseRef=FirebaseDatabase.getInstance().getReference("users")
-                .child(userId)
+        if (FirebaseAuth.getInstance().currentUser?.uid != null) {
             showProfileFields()
-        }else{
-            Log.d("ABC","UserId is null")
+        } else {
+            Log.d("EditProfileFragment", "UserId is null")
         }
+        initListeners()
+    }
+
+    private fun initListeners() {
         binding.btnUpdateProfile.setOnClickListener {
             updateProfile()
         }
     }
 
     private fun showProfileFields() {
-        databaseRef.get().addOnSuccessListener { res ->
-            if (res.exists()) {
-                val fullName = res.child("fullName").value?.toString() ?: ""
-                val email = res.child("email").value?.toString() ?: ""
-                val contactNumber = res.child("contactNumber").value?.toString() ?: ""
-                binding.etProfileName.setText(fullName)
-                binding.etProfileEmail.setText(email)
-                binding.etProfileNumber.setText(contactNumber)
+        databaseRef.get()
+            .addOnSuccessListener { snapshot ->
+                snapshot.takeIf { it.exists() }?.let { res ->
+                    binding.etProfileName.setText(res.child("fullName").value?.toString())
+                    binding.etProfileNumber.setText(res.child("contactNumber").value?.toString())
+                }
             }
-        }.addOnFailureListener { e ->
-            Toast.makeText(requireContext(), "Error fetching profile: ${e.message}", Toast.LENGTH_SHORT).show()
-        }
+            .addOnFailureListener { e ->
+                Toast.makeText(requireContext(), "Error fetching profile: ${e.message}", Toast.LENGTH_SHORT).show()
+            }
     }
 
     private fun updateProfile() {
+        val fullName = binding.etProfileName.text.toString().trim()
+        val contactNumber = binding.etProfileNumber.text.toString().trim()
 
-        val fullName=binding.etProfileName.text.toString().trim()
-        val contactNumber=binding.etProfileNumber.text.toString().trim()
-        val email=binding.etProfileEmail.text.toString().trim()
-        
-        if (fullName.isEmpty()||contactNumber.isEmpty()||email.isEmpty()){
+        if (fullName.isEmpty() || contactNumber.isEmpty()) {
             Toast.makeText(requireContext(), "All fields are required", Toast.LENGTH_SHORT).show()
             return
         }
 
-         binding.progressBarUpdate.visibility = View.VISIBLE // Show ProgressBar
+        showProgressBar()
 
         val updatedData = mapOf(
             "fullName" to fullName,
-            "email" to email,
             "contactNumber" to contactNumber
         )
 
         databaseRef.updateChildren(updatedData)
             .addOnSuccessListener {
-                CoroutineScope(Dispatchers.Main).launch {
-                    delay(2000) // Wait for 2 seconds
-                    binding.progressBarUpdate.visibility=View.GONE
-                    findNavController().navigate(R.id.action_editProfileFragment_to_profileFragment)
-                }
-                Toast.makeText(requireContext(), "Profile updated successfully!", Toast.LENGTH_SHORT).show()
+                onProfileUpdateSuccess()
             }
             .addOnFailureListener { e ->
-                Toast.makeText(requireContext(), "Failed to update profile: ${e.message}", Toast.LENGTH_SHORT).show()
+                onProfileUpdateFailure(e)
             }
-
     }
 
+    private fun showProgressBar() {
+        binding.progressBarUpdate.visibility = View.VISIBLE
+    }
+
+    private fun hideProgressBar() {
+        binding.progressBarUpdate.visibility = View.GONE
+    }
+
+    private fun onProfileUpdateSuccess() {
+        CoroutineScope(Dispatchers.Main).launch {
+            delay(2000)
+            hideProgressBar()
+            findNavController().navigate(
+                R.id.action_editProfileFragment_to_profileFragment,
+                null,
+                NavOptions.Builder().setPopUpTo(R.id.editProfileFragment, true).build()
+            )
+        }
+        Toast.makeText(requireContext(), "Profile updated successfully!", Toast.LENGTH_SHORT).show()
+    }
+
+    private fun onProfileUpdateFailure(e: Exception) {
+        hideProgressBar()
+        Toast.makeText(requireContext(), "Failed to update profile: ${e.message}", Toast.LENGTH_SHORT).show()
+    }
 }
