@@ -17,11 +17,12 @@ import com.example.beautyparlorapp.databinding.FragmentServiceListBinding
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.toObject
 
-class ServiceListFragment : Fragment() {
+class ServiceListFragment : Fragment(),ServiceListAdapter.CartUpdateListener {
 
     private lateinit var binding: FragmentServiceListBinding
     private lateinit var serviceList:ArrayList<ServiceModel>
-    private val serviceListAdapter by lazy { ServiceListAdapter(onProductClick = ::onProductClick,requireContext(),list=serviceList) }
+    //private var serviceImage: Int = R.drawable.facial_cat // Default image
+    private val serviceListAdapter by lazy { ServiceListAdapter(onProductClick = ::onProductClick,requireContext(),list=serviceList, isCartFragment = false, cartUpdateListener = this) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,6 +34,11 @@ class ServiceListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+//        arguments?.let {
+//            serviceImage = it.getInt("serviceImage", R.drawable.facial_cat)
+//        }
+//        binding.
         setUpRecyclerView()
     }
 
@@ -72,7 +78,14 @@ class ServiceListFragment : Fragment() {
     }
 
     private fun onProductClick(serviceModel: ServiceModel) {
-       findNavController().navigate(R.id.action_serviceListFragment_to_detailServiceFragment)
+        val bundle= Bundle().apply {
+            putString("serviceName",serviceModel.serviceName)
+        }
+       findNavController().navigate(R.id.action_serviceListFragment_to_detailServiceFragment,bundle)
+    }
+
+    override fun onCartUpdated(updatedList: ArrayList<ServiceModel>) {
+
     }
 
 }

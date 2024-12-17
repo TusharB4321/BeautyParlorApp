@@ -48,9 +48,10 @@
                 android:layout_marginStart="15dp"
                 android:layout_marginEnd="15dp"
                 android:textColorHint="@color/white"
-                android:drawablePadding="15dp"
+                android:drawablePadding="10dp"
                 android:gravity="center_vertical"
-                android:padding="20dp"
+                android:padding="15dp"
+                android:focusable="false"
                 android:background="@drawable/search"
                 app:drawableLeftCompat="@drawable/ic_baseline_search_24"
                 app:drawableTint="@color/white" />

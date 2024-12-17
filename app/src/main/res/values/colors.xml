@@ -10,5 +10,7 @@
     <color name="gray">#B2000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="red">#F20101</color>
+    <color name="light">#B1E2E2</color>
+    <color name="light2">#F2BBEE</color>
     <color name="green">#17C41E</color>
 </resources>
