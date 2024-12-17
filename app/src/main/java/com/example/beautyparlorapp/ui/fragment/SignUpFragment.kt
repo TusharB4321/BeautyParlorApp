@@ -48,7 +48,6 @@ class SignUpFragment : Fragment() {
         progress.setTitle("Please Wait...")
         progress.setCancelable(false)
 
-        allReadyRegister()
 
         binding.tvLogIn.setOnClickListener {
             findNavController().navigate(R.id.action_signUpFragment_to_loginFragment)
@@ -62,7 +61,6 @@ class SignUpFragment : Fragment() {
             val confirmPass = binding.etSignupConfirmPassword.text.toString()
             val contactNumber = binding.etSignupNumber.text.toString()
 
-
             validateAndRegisterUser(fullName=fullName, email = email, password =  password,confirmPass=confirmPass, contactNumber = contactNumber, progress = progress)
         }
 
@@ -72,10 +70,8 @@ class SignUpFragment : Fragment() {
                 is Resources.Loading -> progress.show()
                 is Resources.Success -> {
                     progress.dismiss()
-
+                    findNavController().navigate(R.id.action_signUpFragment_to_homeFragment,null,Constant.slideRightLeftNavOptions)
                     Toast.makeText(requireContext(), "Registration successful!", Toast.LENGTH_SHORT).show()
-
-
                 }
                 is Resources.Error -> {
                     progress.dismiss()
@@ -85,13 +81,6 @@ class SignUpFragment : Fragment() {
         }
     }
 
-    private fun allReadyRegister() {
-
-        val userPresent=FirebaseAuth.getInstance().currentUser
-        if (userPresent != null) {
-            //findNavController().navigate()
-        }
-    }
 
     private fun validateAndRegisterUser(
         fullName: String,
