@@ -60,7 +60,11 @@ dependencies {
     implementation 'androidx.viewpager2:viewpager2:1.1.0'
 
     //horizontal calender
-
     implementation 'com.github.gastricspark:scrolldatepicker:0.0.1'
+
+
+    //lottie animation
+    implementation "com.airbnb.android:lottie:6.1.0"
+
 
 }

@@ -60,17 +60,6 @@
         android:background="@drawable/add_background"
         android:padding="18dp" />
 
-    <View
-        android:id="@+id/view"
-        android:layout_width="match_parent"
-        android:layout_height="10dp"
-        android:layout_marginTop="15dp"
-        android:background="@color/gray"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/etAddress"/>
-
-
     <TextView
         android:id="@+id/text_view"
         android:layout_width="wrap_content"
@@ -79,8 +68,8 @@
         android:layout_marginStart="5dp"
         android:textStyle="bold"
         android:textColor="@color/black"
-        android:layout_marginTop="5dp"
-        app:layout_constraintTop_toBottomOf="@id/view"
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toBottomOf="@id/etAddress"
         app:layout_constraintStart_toStartOf="parent"
         android:textSize="15dp" />
 

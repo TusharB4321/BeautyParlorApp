@@ -25,6 +25,9 @@ class CartFragment : Fragment(),ServiceListAdapter.CartUpdateListener{
     private lateinit var binding: FragmentCartBinding
     private lateinit var list:ArrayList<ServiceModel>
     private lateinit var firestore: FirebaseFirestore
+    private var  totalPrice = 0.0
+    private var totalItems = 0
+    private var discount = 0.0
     private val cartAdapter by lazy { ServiceListAdapter(onProductClick = ::onProductClick,requireContext(), list =list, isCartFragment = true, cartUpdateListener =this) }
 
     override fun onCreateView(
@@ -40,13 +43,16 @@ class CartFragment : Fragment(),ServiceListAdapter.CartUpdateListener{
         firestore=FirebaseFirestore.getInstance()
         setUpCartRv()
         binding.btnSlotBook.setOnClickListener {
-           findNavController().navigate(R.id.action_cartFragment_to_appointmentFragment,null,Constant.slideRightLeftNavOptions)
+            val bundle=Bundle().apply {
+                putDouble("price",totalPrice)
+                putDouble("discount",discount)
+                putInt("totalItems",totalItems)
+            }
+           findNavController().navigate(R.id.action_cartFragment_to_appointmentFragment,bundle,Constant.slideRightLeftNavOptions)
         }
     }
 
     private fun updateCartDetails(cartItems: ArrayList<ServiceModel>) {
-        var totalPrice = 0.0
-        var totalItems = 0
 
         for (item in cartItems) {
             // Clean the servicePrice (remove the '₹' symbol and any spaces)
@@ -68,8 +74,8 @@ class CartFragment : Fragment(),ServiceListAdapter.CartUpdateListener{
         }
 
         // Calculate discount if totalPrice is greater than 5000
-        val discount = if (totalPrice > 5000) totalPrice * 0.10 else 0.0
-        val finalPrice = totalPrice - discount
+         discount = if (totalPrice > 5000) totalPrice * 0.10 else 0.0
+         val finalPrice = totalPrice - discount
 
         // Log the calculated totals
         Log.d("CartDetails", "Total Price: $totalPrice, Total Items: $totalItems, Discount: $discount")
@@ -115,6 +121,7 @@ class CartFragment : Fragment(),ServiceListAdapter.CartUpdateListener{
             }
     }
     private fun onProductClick(serviceModel: ServiceModel) {
+
     }
 
     override fun onCartUpdated(updatedList: ArrayList<ServiceModel>) {

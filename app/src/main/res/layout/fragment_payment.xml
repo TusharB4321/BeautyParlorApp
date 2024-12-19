@@ -184,6 +184,7 @@
                     android:padding="10dp">
 
                     <TextView
+                        android:id="@+id/tvItems"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -293,6 +294,7 @@
                     android:textStyle="bold" />
 
                 <RadioGroup
+                    android:id="@+id/paymentOption"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
@@ -347,7 +349,7 @@
                 android:textStyle="bold" />
 
         <Button
-            android:id="@+id/btnSlotBook"
+            android:id="@+id/btnPay"
             android:layout_width="150dp"
             android:layout_height="50dp"
             android:layout_gravity="end"
