@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/bottom_address_background"
+    android:padding="16dp">
+
+    <EditText
+        android:id="@+id/etFlatNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="House/Flat Number"
+        android:padding="12dp"
+        android:background="@drawable/time_background"
+        android:layout_marginBottom="8dp" />
+
+    <EditText
+        android:id="@+id/etStreet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Street/Road Name"
+        android:padding="12dp"
+        android:background="@drawable/time_background"
+        android:layout_marginBottom="8dp" />
+
+    <EditText
+        android:id="@+id/etCity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="City"
+        android:padding="12dp"
+        android:background="@drawable/time_background"
+        android:layout_marginBottom="8dp" />
+
+    <EditText
+        android:id="@+id/etPinCode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Pin/Zip Code"
+        android:padding="12dp"
+        android:background="@drawable/time_background"
+        android:layout_marginBottom="16dp" />
+
+    <Button
+        android:id="@+id/btnAddAddress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add Address"
+        android:backgroundTint="@color/blue"
+        android:textColor="@color/white" />
+
+</androidx.appcompat.widget.LinearLayoutCompat >
