@@ -12,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.beautyparlorapp.R
 import com.example.beautyparlorapp.data.ServiceModel
 import com.example.beautyparlorapp.databinding.FragmentDetailServiceBinding
+import com.example.beautyparlorapp.utils.Constant
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
@@ -23,6 +24,7 @@ class DetailServiceFragment : Fragment() {
     private lateinit var binding: FragmentDetailServiceBinding
     private lateinit var firestore:FirebaseFirestore
     private var serviceName:String?=""
+    private var isCartAdded:Boolean = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,8 +43,12 @@ class DetailServiceFragment : Fragment() {
         addToCart()
 
         binding.btnBookNow.setOnClickListener {
-            Toast.makeText(requireContext(), "Ui is in Working Mode", Toast.LENGTH_SHORT).show()
-           // findNavController().navigate(R.id.action_detailServiceFragment_to_appoinmentFragment)
+            if (isCartAdded){
+                Toast.makeText(requireContext(), "For Booking Go to Cart Fragment ", Toast.LENGTH_SHORT).show()
+            }else{
+                Toast.makeText(requireContext(), "First You have to select Add To cart ", Toast.LENGTH_SHORT).show()
+            }
+            //findNavController().navigate(R.id.action_detailServiceFragment_to_appointmentFragment,null,Constant.slideRightLeftNavOptions)
         }
     }
 
@@ -79,6 +85,7 @@ class DetailServiceFragment : Fragment() {
                 .set(cartData)
                 .addOnSuccessListener {
                     progressDialog.dismiss()
+                    isCartAdded=true
                     Toast.makeText(requireContext(), "Successfully Added to Cart", Toast.LENGTH_SHORT).show()
                 }
                 .addOnFailureListener { e ->

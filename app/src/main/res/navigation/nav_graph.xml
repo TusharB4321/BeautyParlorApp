@@ -58,20 +58,23 @@
         android:label="Cart"
         tools:layout="@layout/fragment_cart" >
         <action
-            android:id="@+id/action_cartFragment_to_appoinmentFragment"
-            app:destination="@id/appoinmentFragment" />
+            android:id="@+id/action_cartFragment_to_appointmentFragment"
+            app:destination="@id/appointmentFragment" />
     </fragment>
     <fragment
-        android:id="@+id/appoinmentFragment"
-        android:name="com.example.beautyparlorapp.ui.fragment.AppoinmentFragment"
-        android:label="fragment_appoinment"
-        tools:layout="@layout/fragment_appoinment" >
+        android:id="@+id/appointmentFragment"
+        android:name="com.example.beautyparlorapp.ui.fragment.AppointmentFragment"
+        android:label="fragment_appointment"
+        tools:layout="@layout/fragment_appointment" >
         <action
-            android:id="@+id/action_appoinmentFragment_to_paymentFragment"
+            android:id="@+id/action_appointmentFragment_to_paymentFragment"
             app:destination="@id/paymentFragment" />
         <action
-            android:id="@+id/action_appoinmentFragment_to_cartFragment"
+            android:id="@+id/action_appointmentFragment_to_cartFragment"
             app:destination="@id/cartFragment" />
+        <action
+            android:id="@+id/action_appointmentFragment_to_addressFragment"
+            app:destination="@id/addressFragment" />
     </fragment>
     <fragment
         android:id="@+id/bookingFragment"
@@ -84,8 +87,8 @@
         android:label="fragment_detail_service"
         tools:layout="@layout/fragment_detail_service" >
         <action
-            android:id="@+id/action_detailServiceFragment_to_appoinmentFragment"
-            app:destination="@id/appoinmentFragment" />
+            android:id="@+id/action_detailServiceFragment_to_appointmentFragment"
+            app:destination="@id/appointmentFragment" />
     </fragment>
     <fragment
         android:id="@+id/editProfileFragment"
@@ -154,5 +157,14 @@
         <action
             android:id="@+id/action_serviceListFragment_to_detailServiceFragment"
             app:destination="@id/detailServiceFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addressFragment"
+        android:name="com.example.beautyparlorapp.ui.fragment.AddressFragment"
+        android:label="fragment_address"
+        tools:layout="@layout/fragment_address" >
+        <action
+            android:id="@+id/action_addressFragment_to_appointmentFragment"
+            app:destination="@id/appointmentFragment" />
     </fragment>
 </navigation>

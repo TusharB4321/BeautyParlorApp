@@ -35,6 +35,9 @@ class MainActivity : AppCompatActivity() {
                 R.id.editProfileFragment,
                 R.id.detailServiceFragment,
                 R.id.serviceListFragment,
+                R.id.appointmentFragment,
+                R.id.addressFragment,
+                R.id.paymentFragment,
                 R.id.forgetPasswordFragment,
                     ->{
                     binding.bottomBar.visibility= View.GONE

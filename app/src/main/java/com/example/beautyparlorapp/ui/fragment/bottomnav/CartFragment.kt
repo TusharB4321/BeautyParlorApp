@@ -15,6 +15,7 @@ import com.example.beautyparlorapp.R
 import com.example.beautyparlorapp.adapter.ServiceListAdapter
 import com.example.beautyparlorapp.data.ServiceModel
 import com.example.beautyparlorapp.databinding.FragmentCartBinding
+import com.example.beautyparlorapp.utils.Constant
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.toObject
@@ -39,8 +40,7 @@ class CartFragment : Fragment(),ServiceListAdapter.CartUpdateListener{
         firestore=FirebaseFirestore.getInstance()
         setUpCartRv()
         binding.btnSlotBook.setOnClickListener {
-            Toast.makeText(requireContext(), "Ui is in Working Mode", Toast.LENGTH_SHORT).show()
-           // findNavController().navigate(R.id.action_cartFragment_to_appoinmentFragment)
+           findNavController().navigate(R.id.action_cartFragment_to_appointmentFragment,null,Constant.slideRightLeftNavOptions)
         }
     }
 
