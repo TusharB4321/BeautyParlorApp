@@ -56,6 +56,7 @@ class UpcomingFragment : Fragment() {
 
         firestore.collection("Upcoming Services")
             .whereEqualTo("userId", userId)  // Filter services by user ID
+            .whereEqualTo("status", "Pending")
             .get()
             .addOnSuccessListener { res ->
                 upcomingList.clear()  // Clear existing list

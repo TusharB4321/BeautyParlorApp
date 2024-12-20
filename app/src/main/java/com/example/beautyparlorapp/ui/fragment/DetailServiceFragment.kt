@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.example.beautyparlorapp.R
 import com.example.beautyparlorapp.data.ServiceModel
@@ -44,7 +45,15 @@ class DetailServiceFragment : Fragment() {
 
         binding.btnBookNow.setOnClickListener {
             if (isCartAdded){
-                Toast.makeText(requireContext(), "For Booking Go to Cart Fragment ", Toast.LENGTH_SHORT).show()
+                val navOptions = NavOptions.Builder()
+                    .setPopUpTo(R.id.detailServiceFragment, true)  // Pop the DetailServiceFragment from the back stack
+                    .build()
+
+                findNavController().navigate(
+                    R.id.action_detailServiceFragment_to_cartFragment,
+                    null,
+                    navOptions
+                )
             }else{
                 Toast.makeText(requireContext(), "First You have to select Add To cart ", Toast.LENGTH_SHORT).show()
             }
@@ -97,6 +106,8 @@ class DetailServiceFragment : Fragment() {
                             .set(cartData)
                             .addOnSuccessListener {
                                 progressDialog.dismiss()
+                                binding.btnBookNow.text="Go To Cart"
+                                isCartAdded=true
                                 Toast.makeText(requireContext(), "Successfully Added to Cart", Toast.LENGTH_SHORT).show()
                             }
                             .addOnFailureListener { e ->
