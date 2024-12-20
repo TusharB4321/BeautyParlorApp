@@ -91,4 +91,8 @@ class ServiceListFragment : Fragment(),ServiceListAdapter.CartUpdateListener {
 
     }
 
+    override fun onCartEmpty() {
+
+    }
+
 }

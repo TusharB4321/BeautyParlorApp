@@ -14,6 +14,8 @@ import com.example.beautyparlorapp.databinding.FragmentPaymentBinding
 import com.example.beautyparlorapp.databinding.PaymentBottomSheetBinding
 import com.example.beautyparlorapp.utils.Constant
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 
 class PaymentFragment : Fragment() {
 
@@ -90,8 +92,41 @@ class PaymentFragment : Fragment() {
     }
 
     private fun navigateToSuccessFragment() {
-        findNavController().navigate(R.id.action_paymentFragment_to_successFragment,null,Constant.slideRightLeftNavOptions)
+        val userId = FirebaseAuth.getInstance().currentUser?.uid
+
+        if (userId.isNullOrEmpty()) {
+            Toast.makeText(requireContext(), "User not logged in!", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        val cartCollection = FirebaseFirestore.getInstance().collection("Cart Info")
+        cartCollection
+            .whereEqualTo("userId", userId)
+            .get()
+            .addOnSuccessListener { querySnapshot ->
+                val batch = FirebaseFirestore.getInstance().batch()
+                for (doc in querySnapshot.documents) {
+                    batch.delete(doc.reference)
+                }
+                batch.commit()
+                    .addOnSuccessListener {
+                        Toast.makeText(requireContext(), "Cart cleared successfully!", Toast.LENGTH_SHORT).show()
+                        // Navigate to the success fragment
+                        findNavController().navigate(
+                            R.id.action_paymentFragment_to_successFragment,
+                            null,
+                            Constant.slideRightLeftNavOptions
+                        )
+                    }
+                    .addOnFailureListener { e ->
+                        Toast.makeText(requireContext(), "Error clearing cart: ${e.message}", Toast.LENGTH_SHORT).show()
+                    }
+            }
+            .addOnFailureListener { e ->
+                Toast.makeText(requireContext(), "Error fetching cart: ${e.message}", Toast.LENGTH_SHORT).show()
+            }
     }
+
 
     @SuppressLint("SetTextI18n")
     private fun getOrderDetails() {

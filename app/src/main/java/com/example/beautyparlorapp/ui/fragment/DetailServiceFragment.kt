@@ -70,23 +70,40 @@ class DetailServiceFragment : Fragment() {
             progressDialog.show()
 
             val cartCollection = firestore.collection("Cart Info")
-            val documentId = cartCollection.document().id
 
-            // Create ServiceModel object with both userId and documentId
-            val cartData = ServiceModel(
-                documentId = documentId,
-                userId = userId,
-                serviceName = serviceName,
-                servicePrice = servicePrice,
-                serviceDuration = serviceDuration
-            ).apply { this.documentId = documentId }
+            // Check if the item already exists in the cart for the user
+            cartCollection
+                .whereEqualTo("userId", userId)
+                .whereEqualTo("serviceName", serviceName)
+                .get()
+                .addOnSuccessListener { querySnapshot ->
+                    if (!querySnapshot.isEmpty) {
+                        // Item already exists in the cart
+                        progressDialog.dismiss()
+                        Toast.makeText(requireContext(), "This item is already in your cart!", Toast.LENGTH_SHORT).show()
+                    } else {
+                        // Item does not exist, proceed to add it
+                        val documentId = cartCollection.document().id
 
-            cartCollection.document(documentId)
-                .set(cartData)
-                .addOnSuccessListener {
-                    progressDialog.dismiss()
-                    isCartAdded=true
-                    Toast.makeText(requireContext(), "Successfully Added to Cart", Toast.LENGTH_SHORT).show()
+                        val cartData = ServiceModel(
+                            documentId = documentId,
+                            userId = userId,
+                            serviceName = serviceName,
+                            servicePrice = servicePrice,
+                            serviceDuration = serviceDuration
+                        )
+
+                        cartCollection.document(documentId)
+                            .set(cartData)
+                            .addOnSuccessListener {
+                                progressDialog.dismiss()
+                                Toast.makeText(requireContext(), "Successfully Added to Cart", Toast.LENGTH_SHORT).show()
+                            }
+                            .addOnFailureListener { e ->
+                                progressDialog.dismiss()
+                                Toast.makeText(requireContext(), "Error: ${e.message}", Toast.LENGTH_SHORT).show()
+                            }
+                    }
                 }
                 .addOnFailureListener { e ->
                     progressDialog.dismiss()
@@ -94,6 +111,7 @@ class DetailServiceFragment : Fragment() {
                 }
         }
     }
+
 
 
     private fun showServiceInfo() {

@@ -104,6 +104,9 @@ class ServiceListAdapter(
                 list.removeAt(position)
                 notifyItemRemoved(position)
                 cartUpdateListener.onCartUpdated(list)
+                if (list.isEmpty()) {
+                    cartUpdateListener.onCartEmpty()
+                }
                 Toast.makeText(holder.itemView.context, "Item deleted", Toast.LENGTH_SHORT).show()
             }
             .addOnFailureListener { e ->
@@ -113,5 +116,6 @@ class ServiceListAdapter(
 
     interface CartUpdateListener {
         fun onCartUpdated(updatedList: ArrayList<ServiceModel>)
+        fun onCartEmpty()
     }
 }
