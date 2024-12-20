@@ -30,6 +30,7 @@ class CartFragment : Fragment(), ServiceListAdapter.CartUpdateListener {
     private var totalPrice = 0.0
     private var totalItems = 0
     private var discount = 0.0
+    private var serviceName=""
     private val cartAdapter by lazy {
         ServiceListAdapter(
             onProductClick = ::onProductClick,
@@ -61,6 +62,7 @@ class CartFragment : Fragment(), ServiceListAdapter.CartUpdateListener {
                 putDouble("price", totalPrice)
                 putDouble("discount", discount)
                 putInt("totalItems", totalItems)
+                putString("serviceName",serviceName)
             }
             findNavController().navigate(
                 R.id.action_cartFragment_to_appointmentFragment,
@@ -129,6 +131,7 @@ class CartFragment : Fragment(), ServiceListAdapter.CartUpdateListener {
                 list.clear()
                 for (doc in res) {
                     val cart = doc.toObject(ServiceModel::class.java)
+                    serviceName=cart.serviceName!!
                     list.add(cart)
                 }
 

@@ -102,9 +102,12 @@ class AppointmentFragment : Fragment() {
                 Toast.makeText(requireContext(), "Please select required fields", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
+
+            val serviceName=arguments?.getString("serviceName")
             val bundle = Bundle().apply {
                 putString("bookingDate", formattedDate)
                 putString("bookingTime", formattedTime)
+                putString("serviceName", serviceName)
                 putString("address", currentAddress)
                 putDouble("totalPrice",totalPrice)
                 putDouble("discount",discount)
