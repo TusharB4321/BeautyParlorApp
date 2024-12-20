@@ -2,20 +2,20 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="5dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="5dp"
-        app:cardCornerRadius="15dp">
+        app:cardElevation="3dp"
+        android:layout_margin="5dp"
+        app:cardCornerRadius="10dp">
 
         <LinearLayout
             android:id="@+id/mainLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#BB8E8E"
+            android:background="@color/white"
             android:weightSum="3"
             android:orientation="horizontal">
 
@@ -40,8 +40,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="15sp"
-                    android:textColor="@color/white"
-                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/inter_semibold"
                     android:text="Service Name"/>
 
                 <TextView
@@ -50,8 +50,8 @@
                     android:layout_height="wrap_content"
                     android:textSize="15sp"
                     android:layout_marginTop="10dp"
-                    android:textColor="@color/white"
-                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/inter_semibold"
                     android:text="Service Price"/>
 
                 <TextView
@@ -60,8 +60,8 @@
                     android:layout_height="wrap_content"
                     android:textSize="15sp"
                     android:layout_marginTop="10dp"
-                    android:textColor="@color/white"
-                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/inter_semibold"
                     android:text="Service Duration"/>
 
 

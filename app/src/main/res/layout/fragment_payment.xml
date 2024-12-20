@@ -28,7 +28,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:fontFamily="@font/inter_medium"
+                android:fontFamily="@font/inter_semibold"
                 android:text="Payable Amount"
                 android:textColor="@color/black"
                 android:textSize="18dp"
@@ -353,6 +353,8 @@
             android:layout_width="150dp"
             android:layout_height="50dp"
             android:layout_gravity="end"
+            android:textColor="@color/white"
+            android:fontFamily="@font/inter_semibold"
             android:text="PAY SECURE ➪" />
 
     </LinearLayout>

@@ -14,7 +14,7 @@
         android:layout_marginTop="60dp"
         android:layout_marginLeft="16dp"
         android:textColor="@color/black"
-        android:fontFamily="@font/inter_extra_bold"
+        android:fontFamily="@font/inter_semibold"
         android:layout_height="wrap_content"/>
 
     <TextView
@@ -26,7 +26,7 @@
         android:layout_marginBottom="8dp"
         android:layout_marginLeft="16dp"
         android:textColor="@color/black"
-        android:fontFamily="@font/inter_medium"
+        android:fontFamily="@font/inter_semibold"
         android:layout_height="wrap_content"/>
 
     <EditText
@@ -51,7 +51,7 @@
         android:layout_marginBottom="8dp"
         android:layout_marginLeft="16dp"
         android:textColor="@color/black"
-        android:fontFamily="@font/inter_medium"
+        android:fontFamily="@font/inter_semibold"
         android:layout_height="wrap_content"/>
 
     <EditText
@@ -91,8 +91,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:background="@drawable/ic_button_bg"
-        android:fontFamily="@font/inter_light"
         android:text="Login"
+        android:fontFamily="@font/inter_semibold"
         android:layout_gravity="center_horizontal"
         android:textAllCaps="false"
         android:textColor="@color/white"
@@ -119,7 +119,7 @@
             android:textSize="20sp"
             android:textStyle="bold"
             android:textColor="@color/black"
-            android:fontFamily="@font/inter_medium"
+            android:fontFamily="@font/inter_semibold"
             android:layout_height="wrap_content"/>
     </LinearLayout>
 </LinearLayout>

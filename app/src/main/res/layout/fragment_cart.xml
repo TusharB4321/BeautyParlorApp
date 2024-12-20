@@ -59,7 +59,8 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Order Details"
+                android:text="My Cart"
+                android:fontFamily="@font/inter_semibold"
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 android:textStyle="bold" />
@@ -87,9 +88,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:text="Price Details"
+                    android:fontFamily="@font/inter_semibold"
                     android:textColor="@color/black"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
+                    android:textSize="20sp"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -100,7 +101,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Price"
-                        android:textColor="@color/black"
+                        android:textColor="@color/dark_gray"
+                        android:fontFamily="@font/inter_semibold"
                         android:textSize="15sp" />
 
                     <TextView
@@ -110,6 +112,7 @@
                         android:gravity="end"
                         android:text="₹ 5000"
                         android:textColor="@color/black"
+                        android:fontFamily="@font/inter_semibold"
                         android:textSize="15sp"
                         android:textStyle="bold" />
                 </LinearLayout>
@@ -123,7 +126,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Discount"
-                        android:textColor="@color/black"
+                        android:fontFamily="@font/inter_semibold"
+                        android:textColor="@color/dark_gray"
                         android:textSize="15sp" />
 
                     <TextView
@@ -133,6 +137,7 @@
                         android:gravity="end"
                         android:text="₹ 5000"
                         android:textColor="@color/black"
+                        android:fontFamily="@font/inter_semibold"
                         android:textSize="15sp"
                         android:textStyle="bold" />
                 </LinearLayout>
@@ -151,8 +156,8 @@
                 android:layout_marginTop="10dp"
                 android:text="Total Amount"
                 android:textColor="@color/black"
-                android:textSize="20dp"
-                android:textStyle="bold" />
+                android:fontFamily="@font/inter_semibold"
+                android:textSize="20dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -164,6 +169,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Including GST"
+                    android:fontFamily="@font/inter_semibold"
                     android:textColor="#FF0202"
                     android:textSize="12sp" />
 
@@ -175,6 +181,7 @@
                     android:text="₹ 5000"
                     android:textColor="@color/black"
                     android:textSize="15sp"
+                    android:fontFamily="@font/inter_semibold"
                     android:textStyle="bold" />
             </LinearLayout>
 
@@ -210,6 +217,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Total items (2)"
+                android:fontFamily="@font/inter_semibold"
                 android:textColor="@color/black"
                 android:textSize="15sp" />
 
@@ -220,7 +228,7 @@
                 android:text="₹ 5000"
                 android:textColor="@color/red"
                 android:textSize="15sp"
-                android:textStyle="bold" />
+                android:fontFamily="@font/inter_semibold"/>
         </LinearLayout>
 
         <Button
@@ -228,7 +236,10 @@
             android:layout_width="150dp"
             android:layout_height="50dp"
             android:layout_gravity="end"
-            android:text="SLOT BOOK ➪" />
+            android:text="SLOT BOOK ➪"
+            android:textColor="@color/white"
+            android:fontFamily="@font/inter_semibold"
+            android:backgroundTint="@color/black"/>
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

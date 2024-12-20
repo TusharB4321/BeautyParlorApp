@@ -6,6 +6,7 @@ import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowInsetsController
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -35,6 +36,8 @@ class SplashFragment : Fragment() {
         if (activity is AppCompatActivity) {
             (activity as AppCompatActivity).supportActionBar!!.hide()
         }
+        // Change status bar icon color
+
         Handler(Looper.getMainLooper()).postDelayed({
 
             if (user != null) {

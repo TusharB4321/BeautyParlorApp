@@ -4,7 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/white"
     android:orientation="vertical"
     tools:context=".ui.fragment.bottomnav.HomeFragment">
 
@@ -24,6 +23,7 @@
         android:textSize="25sp"
         android:layout_marginStart="15dp"
         android:layout_marginTop="20dp"
+        android:fontFamily="@font/inter_semibold"
         android:textColor="@color/black"
         android:text="Welcome Back!"/>
 
@@ -33,6 +33,7 @@
         android:layout_height="wrap_content"
         android:textStyle="normal"
         android:textSize="18sp"
+        android:fontFamily="@font/inter_semibold"
         android:textColor="@color/black"
         android:layout_marginStart="15dp"
         android:text=" "/>
@@ -42,26 +43,26 @@
             <EditText
                 android:id="@+id/search"
                 android:layout_width="match_parent"
-                android:layout_height="57dp"
+                android:layout_height="50dp"
                 android:hint="Search parlor Services"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginStart="15dp"
                 android:layout_marginEnd="15dp"
-                android:textColorHint="@color/white"
+                android:textColorHint="@color/black"
                 android:drawablePadding="10dp"
                 android:gravity="center_vertical"
                 android:padding="15dp"
                 android:focusable="false"
                 android:background="@drawable/search"
                 app:drawableLeftCompat="@drawable/ic_baseline_search_24"
-                app:drawableTint="@color/white" />
+                app:drawableTint="@color/black" />
 
             <com.denzcoskun.imageslider.ImageSlider
                 android:id="@+id/image_slider"
                 android:layout_width="wrap_content"
                 android:layout_marginTop="10dp"
-                android:layout_height="200dp"
-                app:iss_corner_radius="10"
+                android:layout_height="180dp"
+                app:iss_corner_radius="20"
                 android:background="@drawable/tab_background"
                 android:layout_marginStart="15dp"
                 android:layout_marginEnd="15dp"
@@ -75,6 +76,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
                 android:layout_marginEnd="15dp"
+                android:layout_marginTop="10dp"
                 tools:listitem="@layout/service_item_layout"/>
 
         </LinearLayout>

@@ -100,10 +100,11 @@ class HomeFragment : Fragment() {
 
     private fun slideImages() {
         val imgList = ArrayList<SlideModel>()
-        imgList.add(SlideModel(R.drawable.ser2))
         imgList.add(SlideModel(R.drawable.ser3))
         imgList.add(SlideModel(R.drawable.ser4))
         imgList.add(SlideModel(R.drawable.ser5))
+        imgList.add(SlideModel(R.drawable.ser3))
+
 
         binding.imageSlider.setImageList(imgList)
         binding.imageSlider.setImageList(imgList, ScaleTypes.CENTER_CROP)

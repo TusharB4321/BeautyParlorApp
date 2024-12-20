@@ -33,7 +33,7 @@ class ServiceAdapter(private val onProductClick: (ServiceModel) -> Unit, private
         holder.binding.category.text =model.serviceCategory
 
         // Assuming a default image for categories
-        val imgRes = categoryImgMap[model.serviceCategory]?:R.drawable.facial_cat  // Set a default image if needed
+        val imgRes = categoryImgMap[model.serviceCategory]?:R.drawable.mehendi_service  // Set a default image if needed
         holder.binding.img.setImageResource(imgRes)
 
         // Handle click on category

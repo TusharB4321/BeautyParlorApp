@@ -48,7 +48,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Add Address"
-        android:backgroundTint="@color/blue"
+        android:fontFamily="@font/inter_semibold"
+        android:backgroundTint="@color/black"
         android:textColor="@color/white" />
 
 </androidx.appcompat.widget.LinearLayoutCompat >
