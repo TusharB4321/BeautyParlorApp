@@ -47,6 +47,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.paymentFragment,
                 R.id.successFragment,
                 R.id.forgetPasswordFragment,
+                R.id.notificationFragment,
                     ->{
                     binding.bottomBar.visibility= View.GONE
                 }

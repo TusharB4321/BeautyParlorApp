@@ -7,6 +7,33 @@
     android:orientation="vertical"
     tools:context=".ui.fragment.bottomnav.HomeFragment">
 
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardElevation="3dp">
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar_home"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:title="Home"
+            app:titleTextColor="@android:color/black">
+
+            <!-- Notification Icon -->
+            <ImageView
+                android:id="@+id/iv_notifications"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:padding="8dp"
+                android:src="@drawable/baseline_circle_notifications_24"
+                app:tint="@color/black" />
+
+        </androidx.appcompat.widget.Toolbar>
+    </androidx.cardview.widget.CardView>
+
+
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -22,7 +49,7 @@
         android:textStyle="bold"
         android:textSize="25sp"
         android:layout_marginStart="15dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:fontFamily="@font/inter_semibold"
         android:textColor="@color/black"
         android:text="Welcome Back!"/>

@@ -44,9 +44,17 @@ class HomeFragment : Fragment() {
         displayName()
         slideImages()
         setUpRecyclerView()
+        setUptoolBar()
 
         binding.search.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_searchFragment,null,Constant.slideRightLeftNavOptions)
+        }
+    }
+
+    private fun setUptoolBar() {
+        binding.ivNotifications.setOnClickListener {
+            Toast.makeText(requireContext(), "You receive notifications but here notification list is pending...", Toast.LENGTH_SHORT).show()
+           //findNavController().navigate(R.id.action_homeFragment_to_notificationFragment,null,Constant.slideRightLeftNavOptions)
         }
     }
 
