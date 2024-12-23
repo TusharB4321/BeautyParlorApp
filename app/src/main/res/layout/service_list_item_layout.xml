@@ -25,7 +25,7 @@
                 android:layout_height="130dp"
                 android:scaleType="centerCrop"
                 android:layout_weight="1"
-                android:src="@drawable/facial_cat"/>
+                android:src="@drawable/makeup_cat"/>
 
             <LinearLayout
                 android:layout_width="wrap_content"

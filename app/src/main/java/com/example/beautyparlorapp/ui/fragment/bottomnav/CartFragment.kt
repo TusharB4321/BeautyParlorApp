@@ -31,13 +31,15 @@ class CartFragment : Fragment(), ServiceListAdapter.CartUpdateListener {
     private var totalItems = 0
     private var discount = 0.0
     private var serviceName=""
+    private var categoryImage: Int = R.drawable.facial_cat
     private val cartAdapter by lazy {
         ServiceListAdapter(
             onProductClick = ::onProductClick,
             requireContext(),
             list = list,
             isCartFragment = true,
-            cartUpdateListener = this
+            cartUpdateListener = this,
+            categoryImage = categoryImage
         )
     }
 
@@ -52,6 +54,9 @@ class CartFragment : Fragment(), ServiceListAdapter.CartUpdateListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         firestore = FirebaseFirestore.getInstance()
+        arguments?.let {
+            categoryImage = it.getInt("categoryImage", R.drawable.facial_cat) // Get the image from arguments
+        }
         setUpCartRv()
         setUpListener()
     }

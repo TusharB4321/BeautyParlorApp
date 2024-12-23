@@ -25,6 +25,7 @@ class DetailServiceFragment : Fragment() {
     private lateinit var binding: FragmentDetailServiceBinding
     private lateinit var firestore:FirebaseFirestore
     private var serviceName:String?=""
+    private var serviceImage:Int?=0
     private var isCartAdded:Boolean = false
 
     override fun onCreateView(
@@ -39,6 +40,7 @@ class DetailServiceFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         firestore=FirebaseFirestore.getInstance()
         serviceName=arguments?.getString("serviceName")
+        serviceImage=arguments?.getInt("serviceImage")
         showBeauticianInfo()
         showServiceInfo()
         addToCart()
@@ -196,6 +198,7 @@ class DetailServiceFragment : Fragment() {
         binding.beauticianAddress.text="⚲ $beauticianAddress"
         binding.beauticianRatingBar.rating=beauticianRating.toFloat()
         binding.beauticianReview.text="✍$beauticianReview"
+        binding.imageView.setImageResource(serviceImage!!)
 
 
     }

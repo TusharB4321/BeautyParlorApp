@@ -24,7 +24,8 @@ class ServiceListAdapter(
     private val context: Context,
     private val list: ArrayList<ServiceModel>,
     private val isCartFragment: Boolean,
-    private val cartUpdateListener: CartUpdateListener
+    private val cartUpdateListener: CartUpdateListener,
+    private val categoryImage: Int
 ) : RecyclerView.Adapter<ServiceListAdapter.ViewHolder>() {
 
     class ViewHolder(val binding: ServiceListItemLayoutBinding) : RecyclerView.ViewHolder(binding.root)
@@ -70,6 +71,8 @@ class ServiceListAdapter(
         holder.binding.serviceDuration.text = "Service Duration: ${model.serviceDuration}hrs"
         holder.binding.servicePrice.text = "Service Price: ${model.servicePrice}Rs"
 
+        // Set category image for each item
+        holder.binding.img.setImageResource(categoryImage)
         setRowBackgroundColor(holder, position)
     }
 

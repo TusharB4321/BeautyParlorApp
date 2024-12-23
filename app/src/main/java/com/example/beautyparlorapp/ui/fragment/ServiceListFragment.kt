@@ -23,8 +23,9 @@ class ServiceListFragment : Fragment(),ServiceListAdapter.CartUpdateListener {
 
     private lateinit var binding: FragmentServiceListBinding
     private lateinit var serviceList:ArrayList<ServiceModel>
-    //private var serviceImage: Int = R.drawable.facial_cat // Default image
-    private val serviceListAdapter by lazy { ServiceListAdapter(onProductClick = ::onProductClick,requireContext(),list=serviceList, isCartFragment = false, cartUpdateListener = this) }
+    private var serviceImage: Int = R.drawable.facial_cat // Default image
+    private val serviceListAdapter by lazy { ServiceListAdapter(onProductClick = ::onProductClick,requireContext(),list=serviceList, isCartFragment = false, cartUpdateListener = this
+    ,categoryImage =serviceImage) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,10 +38,9 @@ class ServiceListFragment : Fragment(),ServiceListAdapter.CartUpdateListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        arguments?.let {
-//            serviceImage = it.getInt("serviceImage", R.drawable.facial_cat)
-//        }
-//        binding.
+        arguments?.let {
+            serviceImage = it.getInt("categoryImage", R.drawable.facial_cat) // Get the image from arguments
+        }
         setUpRecyclerView()
     }
 
@@ -82,6 +82,7 @@ class ServiceListFragment : Fragment(),ServiceListAdapter.CartUpdateListener {
     private fun onProductClick(serviceModel: ServiceModel) {
         val bundle= Bundle().apply {
             putString("serviceName",serviceModel.serviceName)
+            putInt("serviceImage",serviceImage)
         }
 
        findNavController().navigate(R.id.action_serviceListFragment_to_detailServiceFragment,bundle,Constant.slideRightLeftNavOptions)

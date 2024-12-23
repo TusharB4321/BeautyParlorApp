@@ -25,6 +25,7 @@ class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
     private lateinit var firestore: FirebaseFirestore
     private lateinit var categoryList: ArrayList<ServiceModel> // This will hold the category names
+
     private val serviceAdapter by lazy {
         ServiceAdapter(onProductClick = ::onCategoryClick, context = requireContext(), list = categoryList)
     }
@@ -119,10 +120,24 @@ class HomeFragment : Fragment() {
     }
 
     private fun onCategoryClick(category: ServiceModel) {
+        // Define the map inside the function
+        val categoryImgMap = mapOf(
+            "Makeup" to R.drawable.makeup_cat,
+            "Facial" to R.drawable.facial_cat,
+            "Waxing" to R.drawable.waxing_cat,
+            "Threading" to R.drawable.threading_ser,
+            "Hair color" to R.drawable.hair_cat,
+            "Mahendi" to R.drawable.mehendi_service
+        )
+
+        // Get the image corresponding to the category
+        val categoryImage = categoryImgMap[category.serviceCategory] ?: R.drawable.mehendi_service // Default image
+
         val bundle = Bundle().apply {
-            putString("serviceCategory", category.serviceCategory) // Pass the selected category to the next fragment
-            //putInt("serviceImage", imgRes)
+            putString("serviceCategory", category.serviceCategory) // Pass the selected category
+            putInt("categoryImage", categoryImage) // Pass the corresponding image resource
         }
-        findNavController().navigate(R.id.action_homeFragment_to_serviceListFragment, bundle,Constant.slideRightLeftNavOptions)
+
+        findNavController().navigate(R.id.action_homeFragment_to_serviceListFragment, bundle, Constant.slideRightLeftNavOptions)
     }
 }
